@@ -1,5 +1,9 @@
 Run the Application
 ==========================
+
+Install Flask using:
+pip install Flask
+
 After setting up your API, start the Flask server:
 
 bash
