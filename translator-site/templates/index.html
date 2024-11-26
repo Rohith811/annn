@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Translator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Language Translator</h1>
+    <form id="translator-form">
+      <textarea id="text-input" placeholder="Enter text to translate" rows="5"></textarea>
+      <select id="language-select">
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <!-- Add more languages as needed -->
+      </select>
+      <button type="submit">Translate</button>
+    </form>
+    <div id="translation-output"></div>
+  </div>
+
+  <script>
+    document.getElementById("translator-form").onsubmit = async function (e) {
+      e.preventDefault();
+      const text = document.getElementById("text-input").value;
+      const language = document.getElementById("language-select").value;
+
+      const response = await fetch("/translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, language })
+      });
+      const data = await response.json();
+      document.getElementById("translation-output").innerText = data.translated_text;
+    };
+  </script>
+</body>
+</html>
