@@ -12,10 +12,9 @@
     <form id="translator-form">
       <textarea id="text-input" placeholder="Enter text to translate" rows="5"></textarea>
       <select id="language-select">
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <!-- Add more languages as needed -->
+        {% for code, name in supported_languages.items() %}
+          <option value="{{ code }}">{{ name }}</option>
+        {% endfor %}
       </select>
       <button type="submit">Translate</button>
     </form>
